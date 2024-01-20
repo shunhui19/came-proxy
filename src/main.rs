@@ -1,12 +1,15 @@
+use gateway::Gateway;
+
+pub mod auth;
 pub mod common;
 pub mod config;
-
-use common::log::*;
-use tracing::info;
+pub mod gateway;
+pub mod health;
+pub mod limits;
+pub mod load_balance;
+pub mod protocols;
 
 fn main() {
-    println!("Hello, world!");
-
-    Logger::init(Some("app".to_string()));
-    info!("came proxy starting...");
+    let gateway = Gateway::new("127.0.0.1".to_string(), 8080);
+    gateway.run();
 }
